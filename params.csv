@@ -1,0 +1,17 @@
+param,value
+D,0.5
+alpha_Hh,3.40E-03
+alpha_ptc,2.70E-05
+alpha_ptc0,3.80E-06
+alpha_signal,1.60E-04
+beta_Hh,3.30E-03
+beta_ptc,1.40E-04
+beta_Ptc,1.50E-03
+beta_signal,5.50E-04
+beta_Hh_Ptc,1.50E-03
+gamma_Hh_Ptc,7.15E-02
+T_Ptc,3.60E-03
+k_ptc,0.14
+k_signal,2.135
+m,3
+n,6.8
