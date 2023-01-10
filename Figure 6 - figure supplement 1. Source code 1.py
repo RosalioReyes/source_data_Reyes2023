@@ -17,7 +17,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-data_ptc = pd.read_csv(r"C:\Users\rosalio\Documents\2023\Hh_robustness\ptc182529C.csv")
+
+data_ptc = pd.read_csv(r"C:\Users\rosalio\Documents\2022\Hh-robustness\ptc182529C.csv")
 
 ptc18C_Width = data_ptc[data_ptc["temperature"] == 18]["width"]
 ptc25C_Width = data_ptc[data_ptc["temperature"] == 25]["width"]
@@ -27,15 +28,18 @@ bp = plt.boxplot([ptc18C_Width, ptc25C_Width, ptc29C_Width], patch_artist=True, 
 
 
 for element in ['boxes', 'whiskers', 'fliers', 'means', 'caps']:
-    plt.setp(bp[element], color="tab:cyan")
+    plt.setp(bp[element], color="dodgerblue")
 plt.setp(bp["medians"], color="black")
 
 for patch in bp['boxes']:
-    patch.set(facecolor="tab:cyan")     
+    patch.set(facecolor="dodgerblue")     
 
 plt.xticks([1,2,3], ["18", "25", "29"])
 plt.xlabel("Temperature (°C)")
 plt.ylabel("Width ($\mu m$)")
+plt.ylim(9,27)
+
+
 
 from scipy.stats import ttest_ind
 from scipy.stats import mannwhitneyu
@@ -101,22 +105,29 @@ def drawSignificance2(array1, array2, position_array1, position_array2, begin_li
     return
 
 
-drawSignificance2(ptc18C_Width, ptc25C_Width, 1.2,1.75,18,15.5,2.5, False) # 1 y 2
-drawSignificance2(ptc25C_Width, ptc29C_Width, 2.25,2.8, 15.5, 16.5, 3.9, False) # 2 y 3
-drawSignificance2(ptc18C_Width, ptc29C_Width, 1.2,2.8,22.5, 22.5, 2, False)  # 1 y 3
-plt.ylim(7.5, 27)
+plt.xticks([1,2, 3], ["18", "25", "29"])
+plt.xlabel("Temperature (°C)")
+plt.ylabel("Width ($\mu m$)")
+plt.ylim(9,27)
+
+
+drawSignificance2(ptc18C_Width, ptc25C_Width, 1.2, 1.75, 21, 19.7, 1, False) # 1 y 2
+drawSignificance2(ptc25C_Width, ptc29C_Width, 2.25, 2.8, 19.7, 19.3, 2.3, False) # 2 y 3
+drawSignificance2(ptc18C_Width, ptc29C_Width, 1.2, 2.8, 24, 24, 1, False)  # 1 y 3
+
 plt.show()
 
-
 ############# dpp ##########################################
-data_dpp = pd.read_csv(r"C:\Users\rosalio\Documents\2023\Hh_robustness\dpp182529C.csv")
+data_dpp = pd.read_csv(r"C:\Users\rosalio\Documents\2022\Hh-robustness\dpp182529C.csv")
 
 dpp18C_Width = data_dpp[data_dpp["temperature"] == 18]["width"]
 dpp25C_Width = data_dpp[data_dpp["temperature"] == 25]["width"]
 dpp29C_Width = data_dpp[data_dpp["temperature"] == 29]["width"]
         
 bp = plt.boxplot([dpp18C_Width, dpp25C_Width, dpp29C_Width], patch_artist=True, showfliers = False)
-
+#plt.plot([1 for i in Col18C], Col18C, "o" ,c = "g")
+#plt.plot([2 for i in Col25C], Col25C, "o" ,c = "g")
+#plt.plot([3 for i in Col29C], Col29C, "o" ,c = "g")
 
 for element in ['boxes', 'whiskers', 'fliers', 'means', 'caps']:
     plt.setp(bp[element], color="red")
@@ -129,9 +140,9 @@ plt.xticks([1,2,3], ["18", "25", "29"])
 plt.xlabel("Temperature (°C)")
 plt.ylabel("Width ($\mu m$)")
 
+drawSignificance2(dpp18C_Width, dpp25C_Width, 1.2,1.75,32,35.6,2.5, False) # 1 y 2
+drawSignificance2(dpp25C_Width, dpp29C_Width, 2.25,2.8, 35.6, 37.7, 0.5, False) # 2 y 3
+drawSignificance2(dpp18C_Width, dpp29C_Width, 1.2,2.8,40, 40, 2, False)  # 1 y 3
+plt.ylim(19, 45)
 
-drawSignificance2(dpp18C_Width, dpp25C_Width, 1.2,1.75,26,27.5,5.5, False) # 1 y 2
-drawSignificance2(dpp25C_Width, dpp29C_Width, 2.25,2.8, 27.5, 32.5, 0.5, False) # 2 y 3
-drawSignificance2(dpp18C_Width, dpp29C_Width, 1.2,2.8,36, 36, 2, False)  # 1 y 3
-plt.ylim(15, 40)
 plt.show()
